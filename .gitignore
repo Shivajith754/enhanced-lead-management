@@ -1,0 +1,38 @@
+# Node.js dependencies
+node_modules/
+
+# Salesforce CLI cache
+.sfdx/
+.sf/
+
+# Coverage reports
+coverage/
+coverage-report.json
+
+# VS Code settings and files
+.vscode/
+*.code-workspace
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Salesforce-specific files
+*.scratch-org-cache
+*.orgdef
+*.token
+project.json
+
+# Build artifacts
+*.zip
+*.tar.gz
+*.bak
+.idea/
+*.iml
+
+# Custom untracked files
+.forceignore
