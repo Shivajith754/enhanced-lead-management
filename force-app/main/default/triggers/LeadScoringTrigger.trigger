@@ -36,11 +36,11 @@ trigger LeadScoringTrigger on Lead (before insert, before update) {
 
         // Lead Assignment Logic
         if (score >= 25) {
-            lead.OwnerId = '005WU000009ETL8'; // Replace with User ID of senior sales rep
+            lead.OwnerId = '005WU000009ETL8'; //  User ID of senior sales rep
         } else if (score >= 15) {
-            lead.OwnerId = '005WU000009EVxJ'; // Replace with User ID of junior sales rep
+            lead.OwnerId = '005WU000009EVxJ'; //  User ID of junior sales rep
         } else {
-            lead.OwnerId = '00GWU000007nmXJ'; // Replace with Queue ID for low-priority leads
+            lead.OwnerId = '00GWU000007nmXJ'; //  Queue ID for low-priority leads
         }
 
         // Add leads to notify if the OwnerId has changed and the new owner is a user (not a queue)

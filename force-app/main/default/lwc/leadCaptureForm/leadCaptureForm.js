@@ -48,7 +48,7 @@ export default class LeadCaptureForm extends LightningElement {
 
     handleSubmit() {
         // Validation for required fields
-        if (!this.lastName || !this.company || !this.priority) { // Include priority if required
+        if (!this.lastName || !this.company || !this.priority) { 
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: 'Validation Error',
@@ -71,9 +71,7 @@ export default class LeadCaptureForm extends LightningElement {
                 ? parseFloat(this.annualRevenue.replace(/,/g, ''))
                 : null,
             LeadSource: this.leadSource,
-            Priority__c: this.priority, // Ensure correct field name
-            // Optionally, set the standard Priority field if it exists
-            // Priority: this.priority, // Uncomment if standard Priority field exists
+            Priority__c: this.priority, 
         };
     
         console.log('Submitting Lead with fields:', JSON.stringify(fields));
