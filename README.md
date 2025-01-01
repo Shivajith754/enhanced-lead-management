@@ -1,92 +1,127 @@
-Enhanced Lead Management Project
+# Enhanced Lead Management
 
-Overview
+Enhanced Lead Management is a Salesforce application that automates lead scoring, assignment, and notifications. Built with Salesforce Triggers, Apex Classes, and Lightning Web Components (LWC), this project optimizes lead handling to enhance sales productivity.
 
-This project is an Enhanced Lead Management Application built on Salesforce. It includes functionality for capturing, scoring, assigning, and notifying sales representatives about new leads. The project is implemented using Apex, Lightning Web Components (LWC), and declarative Salesforce features.
+---
 
-Features
+## Features
 
-Lead Capture Form (LWC):
+- **Lead Scoring**: Automatically calculates a lead score based on predefined criteria like industry, annual revenue, and lead source.
+- **Automated Lead Assignment**: Assigns leads to the appropriate sales representative or queue based on their score.
+- **Email Notifications**: Sends real-time email notifications to sales representatives when leads are assigned.
+- **Customizable UI**: Provides a Lightning Web Component for capturing and managing leads with a user-friendly interface.
+- **Comprehensive Unit Testing**: Includes robust test classes to ensure functionality and maintain high code coverage.
 
-Allows users to submit new leads via a user-friendly form.
+---
 
-Validates required fields such as Last Name, Company, and Priority.
+## Components
 
-Submits lead data to Salesforce using Apex.
+### **Triggers**
+- **`LeadScoringTrigger`**: Handles lead scoring, assignment, and email notifications.
 
-Lead Scoring and Assignment:
+### **Apex Classes**
+- **`LeadCaptureFormController`**: Handles backend logic for the Lightning Web Component.
+- **`LeadNotificationHelper`**: Manages email notifications for assigned leads.
+- **`LeadNotificationHelperTest`**: Unit test class for `LeadNotificationHelper`.
+- **`LeadScoringTriggerTest`**: Unit test class for `LeadScoringTrigger`.
 
-Automatically scores leads based on Industry, Annual Revenue, and Lead Source.
+### **Lightning Web Component**
+- **Lead Capture Form**:
+  - Collects lead details (name, company, industry, annual revenue, etc.).
+  - Provides a clean and intuitive interface for data entry.
 
-Assigns leads to appropriate sales reps or queues based on their scores.
+---
 
-Notifications:
+## How It Works
 
-Sends email notifications to lead owners when leads are assigned to them.
+### **1. Lead Creation**
+- Users can create leads using the Lightning Web Component or directly in Salesforce.
 
-Apex Unit Tests:
+### **2. Lead Scoring**
+The trigger calculates a score based on:
+- **Industry**:
+  - Technology: +10 points
+  - Retail: +5 points
+  - Others: +1 point
+- **Annual Revenue**:
+  - >1,000,000: +10 points
+  - 500,000 - 1,000,000: +5 points
+  - <500,000: +1 point
+- **Lead Source**:
+  - Web: +10 points
+  - Referral: +5 points
+  - Others: +2 points
 
-Ensures the functionality of lead scoring, assignment, and notifications with over 75% code coverage.
+### **3. Lead Assignment**
+- **Score ≥ 25**: Assigned to senior sales representatives.
+- **Score 15 - 24**: Assigned to junior sales representatives.
+- **Score < 15**: Assigned to a low-priority queue.
 
-Components
+### **4. Email Notifications**
+- When a lead is assigned, email notifications are sent to the appropriate sales representative.
 
-Apex Classes
+---
 
-LeadCaptureFormController: Handles lead creation from the Lead Capture Form.
+## Installation
 
-LeadNotificationHelper: Sends email notifications to lead owners when leads are assigned.
+### **Prerequisites**
+- [Salesforce CLI](https://developer.salesforce.com/tools/sfdxcli) installed.
+- Access to a Salesforce Developer Org or Sandbox.
+- [Git](https://git-scm.com/) installed.
 
-LeadNotificationHelperTest: Unit test for LeadNotificationHelper to validate email notification logic.
+### **Steps**
+1. **Clone the repository**:
+   ```bash
+   git clone <repository-url>
+   cd enhanced-lead-management
+2. **Authenticate with your Salesforce org**:
+    ```bash
+    sf login org
+3. **Deploy the code to Salesforce**:
+    ```bash
+    sf project deploy start --target-org <your-org-alias>
+4. **Run unit tests to verify the deployment**:
+    ```bash
+    sf apex run test --target-org <your-org-alias> --result-format human --code-coverage --synchronous
 
-LeadScoringTriggerTest: Unit test for the LeadScoringTrigger to validate lead scoring and assignment.
+## Usage
 
-Apex Trigger
+1. **Navigate to the Lead Capture Form** in your Salesforce application.
+2. **Enter lead details** such as:
+   - Name
+   - Company
+   - Industry
+   - Annual Revenue
+   - Priority
+3. **Click Submit** to create the lead.
+4. The lead's **score and assigned owner** will be displayed on the **Lead Detail page**.
+5. Assigned sales representatives will **receive email notifications**.
 
-LeadScoringTrigger:
+---
 
-Automatically scores leads based on predefined rules.
+## Testing
 
-Assigns leads to appropriate owners based on their scores.
+### Unit Tests
+- **`LeadScoringTriggerTest`**: Covers lead scoring and assignment logic.
+- **`LeadNotificationHelperTest`**: Validates email notification functionality.
 
-Integrates with LeadNotificationHelper to notify users of new assignments.
+### Run All Tests
+Use the following command:
+```bash
+sf apex run test --target-org <your-org-alias> --result-format human --code-coverage --synchronous
 
-Lightning Web Component (LWC)
+## Contributing
 
-LeadCaptureForm:
+Contributions are welcome! Follow these steps:
 
-Captures lead details such as Name, Company, Industry, Revenue, and Priority.
-
-Validates required fields and handles user input dynamically.
-
-Submits data to Salesforce using Apex.
-
-Installation
-
-Clone the Repository:
-
-git clone <REPOSITORY_URL>
-cd Enhanced-Lead-Management
-
-Authorize a Salesforce Org:
-
-sf org login web --alias MyOrgAlias
-
-Deploy Metadata to the Org:
-
-sf deploy metadata --source-dir force-app --target-org MyOrgAlias
-
-Run Apex Tests:
-
-sf apex run test --target-org MyOrgAlias --result-format human --code-coverage
-
-Usage
-
-Navigate to the Salesforce app where the Lead Capture Form is deployed.
-
-Fill in the form fields (Last Name, Company, and Priority are required).
-
-Submit the form to create a new lead.
-
-Leads are automatically scored and assigned to sales reps or queues.
-
-Assigned sales reps receive email notifications about their new leads.
+1. **Fork the repository**.
+2. **Create a new branch** for your feature:
+   ```bash
+   git checkout -b feature/your-feature-name
+3. **Commit your changes**:
+    ```bash
+    git commit -m "Add new feature or fix bug"
+4. **Push your changes**:
+    ```bash
+    git push origin feature/your-feature-name
+5. **Open a pull request** on GitHub:
